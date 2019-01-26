@@ -20,13 +20,13 @@ public class Drive extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  public static Talon frontLeft = new Talon(1);
-  public static Talon rearLeft = new Talon(2);
-  public static SpeedControllerGroup left = new SpeedControllerGroup(frontLeft, rearLeft);
-  public static Talon frontRight = new Talon(3);
-  public static Talon rearRight = new Talon(4);
-  public static SpeedControllerGroup right = new SpeedControllerGroup(frontRight, rearRight);
-  public static DifferentialDrive drive = new DifferentialDrive(left, right);
+  public Talon frontLeft = new Talon(1);
+  public Talon rearLeft = new Talon(2);
+  public SpeedControllerGroup left = new SpeedControllerGroup(frontLeft, rearLeft);
+  public Talon frontRight = new Talon(3);
+  public Talon rearRight = new Talon(4);
+  public SpeedControllerGroup right = new SpeedControllerGroup(frontRight, rearRight);
+  public DifferentialDrive drive = new DifferentialDrive(left, right);
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
