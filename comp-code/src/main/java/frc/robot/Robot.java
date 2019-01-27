@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.JeVois;
 import edu.wpi.first.wpilibj.XboxController;
 
 /**
@@ -24,6 +25,7 @@ import edu.wpi.first.wpilibj.XboxController;
  */
 public class Robot extends TimedRobot {
   public static Drive drive = new Drive();
+  public static JeVois jevois = new JeVois();
   public static OI m_oi;
 
   public static XboxController controller1 = new XboxController(1);

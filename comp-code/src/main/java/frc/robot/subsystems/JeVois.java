@@ -20,7 +20,7 @@ public class JeVois extends Subsystem {
   // here. Call these from Commands.
 
   // Serial interface
-  public SerialPort port;
+  //public SerialPort port;
 
   // USB camera interface
   public UsbCamera cam;

@@ -24,19 +24,19 @@ public class RunJeVois extends Command {
   @Override
   protected void initialize() {
     // Initialize serial interface with JeVois
-    Robot.jevois.port = new SerialPort(115200, Port.kUSB1);
+    /*Robot.jevois.port = new SerialPort(115200, Port.kUSB1);
     Robot.jevois.port.writeString("hello");
-    Robot.jevois.port.flush();
+    Robot.jevois.port.flush();*/
 
-    //Robot.jevois.cam = CameraServer.getInstance().startAutomaticCapture();
+    Robot.jevois.cam = CameraServer.getInstance().startAutomaticCapture();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.jevois.port.getBytesReceived() > 0) {
+    /*if(Robot.jevois.port.getBytesReceived() > 0) {
       System.out.println(Robot.jevois.port.readString());
-    }
+    }*/
   }
 
   // Make this return true when this Command no longer needs to run execute()
