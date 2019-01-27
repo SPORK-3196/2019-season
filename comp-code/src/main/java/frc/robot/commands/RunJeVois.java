@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.SerialPort.Port;
+import edu.wpi.first.wpilibj.SerialPort.WriteBufferMode;
 
 public class RunJeVois extends Command {
   public RunJeVois() {
@@ -24,19 +25,23 @@ public class RunJeVois extends Command {
   @Override
   protected void initialize() {
     // Initialize serial interface with JeVois
-    /*Robot.jevois.port = new SerialPort(115200, Port.kUSB1);
-    Robot.jevois.port.writeString("hello");
-    Robot.jevois.port.flush();*/
-
+    Robot.jevois.port = new SerialPort(115200, Port.kUSB);
+    Robot.jevois.port.setWriteBufferMode(WriteBufferMode.kFlushWhenFull);
+    // Initialize usb camera interface with JeVois
     Robot.jevois.cam = CameraServer.getInstance().startAutomaticCapture();
+    Robot.jevois.cam.setResolution(320, 240);
+    Robot.jevois.cam.setFPS(20);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    /*if(Robot.jevois.port.getBytesReceived() > 0) {
+    Robot.jevois.port.writeString("help");
+    Robot.jevois.port.flush();
+    if(Robot.jevois.port.getBytesReceived() > 0) {
+      System.out.print("JV: ");
       System.out.println(Robot.jevois.port.readString());
-    }*/
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
