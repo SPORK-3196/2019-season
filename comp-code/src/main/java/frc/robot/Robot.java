@@ -24,11 +24,11 @@ import edu.wpi.first.wpilibj.XboxController;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static Drive drive = new Drive();
-  public static JeVois jevois = new JeVois();
+  public static Drive drive;
+  public static JeVois jevois;
   public static OI m_oi;
 
-  public static XboxController controller1 = new XboxController(1);
+  public static XboxController controller0 = new XboxController(0);
 
   /**
    * This function is run when the robot is first started up and should be
@@ -36,6 +36,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    drive = new Drive();
+    jevois = new JeVois();
     m_oi = new OI();
   }
 
