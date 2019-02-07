@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -15,6 +17,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Climb extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+
+  public WPI_TalonSRX frontClimb = new WPI_TalonSRX(6);
+  public WPI_TalonSRX rearClimb = new WPI_TalonSRX(7);
+  public WPI_TalonSRX rearClimbWheels = new WPI_TalonSRX(8);
 
   @Override
   public void initDefaultCommand() {
