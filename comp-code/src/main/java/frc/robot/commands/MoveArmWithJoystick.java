@@ -8,21 +8,26 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
 public class MoveArmWithJoystick extends Command {
   public MoveArmWithJoystick() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    requires(Robot.arm);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.arm.armMotor.set(0);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    double armSpeed = Robot.controller1.getRawAxis(5);
+    Robot.arm.armMotor.set(armSpeed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
