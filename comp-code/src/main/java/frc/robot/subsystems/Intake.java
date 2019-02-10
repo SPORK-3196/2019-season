@@ -19,8 +19,6 @@ public class Intake extends Subsystem {
   // here. Call these from Commands.
   public WPI_TalonSRX intakeMotor = new WPI_TalonSRX(5);
 
-  public WPI_TalonSRX intakeMotor = new WPI_TalonSRX(5);
-
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
