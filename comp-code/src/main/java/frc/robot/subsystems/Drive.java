@@ -8,10 +8,10 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.commands.DriveWithJoystick;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 /**
  * Add your docs here.
@@ -20,11 +20,11 @@ public class Drive extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  public Talon frontLeft = new Talon(3);
-  public Talon rearLeft = new Talon(4);
+  public WPI_TalonSRX frontLeft = new WPI_TalonSRX(3);
+  public WPI_TalonSRX rearLeft = new WPI_TalonSRX(4);
   public SpeedControllerGroup left = new SpeedControllerGroup(frontLeft, rearLeft);
-  public Talon frontRight = new Talon(1);
-  public Talon rearRight = new Talon(2);
+  public WPI_TalonSRX frontRight = new WPI_TalonSRX(1);
+  public WPI_TalonSRX rearRight = new WPI_TalonSRX(2);
   public SpeedControllerGroup right = new SpeedControllerGroup(frontRight, rearRight);
   public DifferentialDrive drive = new DifferentialDrive(left, right);
   

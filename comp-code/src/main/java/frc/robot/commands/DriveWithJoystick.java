@@ -28,10 +28,6 @@ public class DriveWithJoystick extends Command {
     double driveSpeed = Robot.controller0.getRawAxis(1);
     double driveRotation = Robot.controller0.getRawAxis(0);
     Robot.drive.drive.arcadeDrive(driveSpeed, driveRotation);
-
-    System.out.print(driveSpeed);
-    System.out.print("\t");
-    System.out.println(driveRotation);
   }
 
   // Make this return true when this Command no longer needs to run execute()
