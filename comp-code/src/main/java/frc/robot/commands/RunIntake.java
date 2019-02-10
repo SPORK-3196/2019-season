@@ -8,21 +8,26 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
-public class IntakeOut extends Command {
-  public IntakeOut() {
+public class RunIntake extends Command {
+  public RunIntake() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    requires(Robot.intake);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.intake.intakeMotor.set(0);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    double intakeSpeed = Robot.controller1.getRawAxis(3) - Robot.controller1.getRawAxis(2);
+    Robot.intake.intakeMotor.set(intakeSpeed);
   }
 
   // Make this return true when this Command no longer needs to run execute()

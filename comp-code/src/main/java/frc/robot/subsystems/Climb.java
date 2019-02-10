@@ -21,6 +21,10 @@ public class Climb extends Subsystem {
   public WPI_TalonSRX rearClimb = new WPI_TalonSRX(7);
   public WPI_TalonSRX rearClimbWheels = new WPI_TalonSRX(8);
 
+  public WPI_TalonSRX frontClimb = new WPI_TalonSRX(6);
+  public WPI_TalonSRX rearClimb = new WPI_TalonSRX(7);
+  public WPI_TalonSRX rearClimbWheels = new WPI_TalonSRX(8);
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

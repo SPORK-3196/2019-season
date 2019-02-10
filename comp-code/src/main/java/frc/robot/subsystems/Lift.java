@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -15,6 +17,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Lift extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+
+  public WPI_TalonSRX liftMotor = new WPI_TalonSRX(10);
 
   @Override
   public void initDefaultCommand() {
