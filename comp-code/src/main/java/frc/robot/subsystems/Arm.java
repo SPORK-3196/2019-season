@@ -11,6 +11,8 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.commands.MoveArmWithJoystick;
+import frc.robot.commands.MoveWristWithButtons;
 
 /**
  * Add your docs here.
@@ -26,5 +28,7 @@ public class Arm extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new MoveArmWithJoystick());
+    setDefaultCommand(new MoveWristWithButtons());
   }
 }
