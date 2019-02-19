@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.Climb;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,6 +31,7 @@ public class Robot extends TimedRobot {
   public static Intake intake;
   public static Lift lift;
   public static Arm arm;
+  public static Climb climb;
   public static OI m_oi;
 
 
@@ -46,6 +48,7 @@ public class Robot extends TimedRobot {
     intake = new Intake();
     lift = new Lift();
     arm = new Arm();
+    climb = new Climb();
     m_oi = new OI();
   }
 

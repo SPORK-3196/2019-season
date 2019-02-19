@@ -8,21 +8,29 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
-public class FrontClimberDown extends Command {
-  public FrontClimberDown() {
+public class RunClimber extends Command {
+  public RunClimber() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    requires(Robot.climb);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.climb.rearClimbWheels.set(0);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    double rearClimbWheelsSpeed = Robot.controller0.getRawAxis(5);
+    Robot.climb.rearClimbWheels.set(rearClimbWheelsSpeed);
+
+    int encoderClimbWheels = Robot.climb.rearClimbWheels.getSelectedSensorPosition();
+    System.out.println(encoderClimbWheels);
   }
 
   // Make this return true when this Command no longer needs to run execute()

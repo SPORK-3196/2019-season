@@ -27,8 +27,8 @@ public class MoveWristWithButtons extends Command {
   @Override
   protected void execute() {
     double wristSpeed = 0;
-    if(Robot.controller1.getAButton()) wristSpeed = 0.5;
-    else if(Robot.controller1.getBButton()) wristSpeed = -0.5;
+    if(Robot.controller1.getAButton()) wristSpeed = 0.125;
+    else if(Robot.controller1.getBButton()) wristSpeed = -0.125;
     Robot.arm.wristMotor.set(wristSpeed);
   }
 

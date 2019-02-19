@@ -21,6 +21,7 @@ public class RunIntake extends Command {
   @Override
   protected void initialize() {
     Robot.intake.intakeMotor.set(0);
+    System.out.println("Intaking");
   }
 
   // Called repeatedly when this Command is scheduled to run
