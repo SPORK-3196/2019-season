@@ -7,35 +7,47 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.commands.MoveArmWithJoystick;
-import frc.robot.commands.MoveWristWithButtons;
 
-public class RunArm extends CommandGroup {
-  /**
-   * Add your docs here.
-   */
+public class RunArm extends Command {
   public RunArm() {
-    // Add Commands here:
-    // e.g. addSequential(new Command1());
-    // addSequential(new Command2());
-    // these will run in order.
-
-    // To run multiple commands at the same time,
-    // use addParallel()
-    // e.g. addParallel(new Command1());
-    // addSequential(new Command2());
-    // Command1 and Command2 will run in parallel.
-
-    // A command group will require all of the subsystems that each member
-    // would require.
-    // e.g. if Command1 requires chassis, and Command2 requires arm,
-    // a CommandGroup containing them would require both the chassis and the
-    // arm.
-
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
     requires(Robot.arm);
-    addParallel(new MoveArmWithJoystick());
-    addParallel(new MoveWristWithButtons());
+  }
+
+  // Called just before this Command runs the first time
+  @Override
+  protected void initialize() {
+    Robot.arm.armMotor.set(0);
+    Robot.arm.wristMotor.set(0);
+  }
+
+  // Called repeatedly when this Command is scheduled to run
+  @Override
+  protected void execute() {
+    double armSpeed = Robot.controller1.getRawAxis(5);
+    double wristSpeed = Robot.controller1.getAButton() ? 0.4 : Robot.controller1.getBButton() ? -0.4 : 0;
+
+    Robot.arm.armMotor.set(armSpeed);
+    Robot.arm.wristMotor.set(wristSpeed);
+  }
+
+  // Make this return true when this Command no longer needs to run execute()
+  @Override
+  protected boolean isFinished() {
+    return false;
+  }
+
+  // Called once after isFinished returns true
+  @Override
+  protected void end() {
+  }
+
+  // Called when another command which requires one or more of the same
+  // subsystems is scheduled to run
+  @Override
+  protected void interrupted() {
   }
 }
