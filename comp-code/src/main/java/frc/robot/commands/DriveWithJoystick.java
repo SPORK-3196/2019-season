@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
@@ -25,9 +26,15 @@ public class DriveWithJoystick extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double driveSpeed = -Robot.controller0.getRawAxis(1);
-    double driveRotation = Robot.controller0.getRawAxis(0);
+    double driveSpeed = -1*Robot.controller0.getRawAxis(1);
+    double driveRotation = 1*Robot.controller0.getRawAxis(0);
     Robot.drive.drive.arcadeDrive(driveSpeed, driveRotation);
+
+    int encoderL = Robot.drive.frontLeft.getSelectedSensorPosition();
+    int encoderR = Robot.drive.frontRight.getSelectedSensorPosition();
+    System.out.print(encoderL);
+    System.out.print("\t\t");
+    System.out.println(encoderR);
   }
 
   // Make this return true when this Command no longer needs to run execute()
