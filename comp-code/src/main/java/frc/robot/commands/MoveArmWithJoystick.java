@@ -21,6 +21,7 @@ public class MoveArmWithJoystick extends Command {
   @Override
   protected void initialize() {
     Robot.arm.armMotor.set(0);
+    System.out.print("Arming");
   }
 
   // Called repeatedly when this Command is scheduled to run

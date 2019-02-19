@@ -31,8 +31,8 @@ public class LiftWithJoystick extends Command {
 
     Robot.lift.liftMotor.set(liftSpeed);
 
-    int encoderLift = Robot.lift.liftMotor.getSelectedSensorPosition();
-    System.out.println(encoderLift);
+    int encoderElevator = Robot.lift.liftMotor.getSelectedSensorPosition();
+    //System.out.println(encoderElevator);
   }
 
 
