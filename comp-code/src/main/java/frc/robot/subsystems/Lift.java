@@ -19,7 +19,21 @@ public class Lift extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
+  public int offset = 0;
+
   public WPI_TalonSRX liftMotor = new WPI_TalonSRX(10);
+
+  public int getEncoder() {
+    return liftMotor.getSelectedSensorPosition() - offset;
+  }
+
+  public void resetEncoder() {
+    offset = liftMotor.getSelectedSensorPosition();
+  }
+
+  public void resetEncoderTo(int val) {
+    offset = liftMotor.getSelectedSensorPosition() - val;
+  }
 
   @Override
   public void initDefaultCommand() {

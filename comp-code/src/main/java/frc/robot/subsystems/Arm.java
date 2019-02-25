@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -22,8 +23,14 @@ public class Arm extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
+  public double armEncoder = 0;
+  public double wristEncoder = 0;
+
   public CANSparkMax armMotor = new CANSparkMax(8, MotorType.kBrushless);
+  public CANPIDController armPID = armMotor.getPIDController();
+
   public CANSparkMax wristMotor = new CANSparkMax(9, MotorType.kBrushless);
+  public CANPIDController wristPID = wristMotor.getPIDController();
 
   @Override
   public void initDefaultCommand() {
