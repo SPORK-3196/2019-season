@@ -26,8 +26,13 @@ public class LiftWithJoystick extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double liftSpeed = Robot.controller1.getRawAxis(1);
-    liftSpeed = liftSpeed < -1 ? -1 : liftSpeed;
+    double liftSpeedCoef = Robot.lift.getEncoder() < 5000 ? 0.8 : 1.0;
+    double liftInput = Robot.controller1.getRawAxis(1);
+    double liftSpeed = 0.0;
+
+    if(!(Robot.lift.getEncoder() < 1000 && liftInput > 0)) {
+      liftSpeed = liftInput * liftSpeedCoef;
+    }
 
     Robot.lift.liftMotor.set(liftSpeed);
 
