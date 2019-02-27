@@ -26,8 +26,10 @@ public class DriveWithJoystick extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double driveSpeed = -1*Robot.controller0.getRawAxis(1);
-    double driveRotation = 1*Robot.controller0.getRawAxis(0);
+    double driveCoef = Robot.lift.getEncoder() > 20000 ? 0.7 : 0.9;
+
+    double driveSpeed = -driveCoef*Robot.controller0.getRawAxis(1);
+    double driveRotation = driveCoef*Robot.controller0.getRawAxis(0);
     Robot.drive.drive.arcadeDrive(driveSpeed, driveRotation);
 
     int encoderDL = Robot.drive.frontLeft.getSelectedSensorPosition();
