@@ -35,6 +35,7 @@ public class Robot extends TimedRobot {
   public static Climb climb;
   public static OI m_oi;
 
+  public static boolean climbing = false;
 
   public static XboxController controller0 = new XboxController(0);
   public static XboxController controller1 = new XboxController(1);

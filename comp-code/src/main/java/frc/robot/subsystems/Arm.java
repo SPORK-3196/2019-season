@@ -12,8 +12,6 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.commands.MoveArmWithJoystick;
-import frc.robot.commands.MoveWristWithButtons;
 import frc.robot.commands.RunArm;
 
 /**

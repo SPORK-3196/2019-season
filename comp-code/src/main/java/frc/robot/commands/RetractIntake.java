@@ -7,11 +7,13 @@
 
 package frc.robot.commands;
 
+import com.revrobotics.ControlType;
+
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class MoveArmWithJoystick extends Command {
-  public MoveArmWithJoystick() {
+public class RetractIntake extends Command {
+  public RetractIntake() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.arm);
@@ -20,22 +22,23 @@ public class MoveArmWithJoystick extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.arm.armMotor.set(0);
-    System.out.print("Arming");
+    System.out.println("Retracting intake to begin climbing...");
+    Robot.climbing = true;
+    Robot.arm.armPID.setReference(0, ControlType.kPosition);
+    Robot.arm.wristPID.setReference(0, ControlType.kPosition);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double armSpeed = Robot.controller1.getRawAxis(5);
-    
-    Robot.arm.armMotor.set(armSpeed);
+    Robot.arm.armPID.setReference(0, ControlType.kPosition);
+    Robot.arm.wristPID.setReference(0, ControlType.kPosition);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return !Robot.climbing;
   }
 
   // Called once after isFinished returns true

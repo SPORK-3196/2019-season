@@ -19,10 +19,6 @@ public class RunArm extends Command {
     requires(Robot.arm);
   }
 
-  double map(double x, double in_min, double in_max, double out_min, double out_max) {
-    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-  }
-
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
@@ -42,30 +38,33 @@ public class RunArm extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //double armSpeed = 0.8*Robot.controller1.getRawAxis(5);
+    //double wristSpeed = 0.4*Robot.controller1.getRawAxis(5);
     //double wristSpeed = Robot.controller1.getAButton() ? 0.4 : Robot.controller1.getBButton() ? -0.4 : 0;
 
     //Robot.arm.armMotor.set(armSpeed);
     //Robot.arm.wristMotor.set(wristSpeed);
 
     Robot.arm.armPID.setReference((Robot.lift.getEncoder() / 2000) - 15, ControlType.kPosition);
-    //Robot.arm.armPID.setReference(0, ControlType.kPosition);
+    //Robot.arm.armPID.setReference(-15, ControlType.kPosition);
+
+    Robot.arm.wristPID.setReference(((Robot.arm.armEncoder + 15.0) * (9.0/15.0)) - 9.0, ControlType.kPosition);
 
     Robot.arm.armEncoder = Robot.arm.armMotor.getEncoder().getPosition();
     Robot.arm.wristEncoder = Robot.arm.wristMotor.getEncoder().getPosition();
 
-    System.out.println(Robot.arm.armEncoder);
+    //System.out.println(((Robot.arm.armEncoder + 15.0) * (9.0/15.0)) - 9f);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return Robot.climbing;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    System.out.println("Finished using manual PID arm control...");
   }
 
   // Called when another command which requires one or more of the same
