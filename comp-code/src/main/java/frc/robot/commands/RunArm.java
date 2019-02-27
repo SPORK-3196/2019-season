@@ -47,7 +47,7 @@ public class RunArm extends Command {
     Robot.arm.armPID.setReference((Robot.lift.getEncoder() / 2000) - 15, ControlType.kPosition);
     //Robot.arm.armPID.setReference(-15, ControlType.kPosition);
 
-    Robot.arm.wristPID.setReference(((Robot.arm.armEncoder + 15.0) * (9.0/15.0)) - 9.0, ControlType.kPosition);
+    Robot.arm.wristPID.setReference(((Robot.arm.armEncoder + 15.0) * (8.5/15.0)) - 8.5, ControlType.kPosition);
 
     Robot.arm.armEncoder = Robot.arm.armMotor.getEncoder().getPosition();
     Robot.arm.wristEncoder = Robot.arm.wristMotor.getEncoder().getPosition();
