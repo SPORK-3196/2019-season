@@ -29,7 +29,7 @@ public class LiftWithJoystick extends Command {
     double liftSpeedCoef = 1.0;
     double liftInput = Robot.controller1.getRawAxis(1);
 
-    if(Robot.lift.getEncoder() < 5000 && liftInput > 0) {
+    if(Robot.lift.getEncoder() < 10000 && liftInput > 0) {
       liftSpeedCoef = 0.2;
     }
 
