@@ -10,7 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.RetractIntake;
+import frc.robot.commands.AutoClimb;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -49,6 +49,6 @@ public class OI {
   // button.whenReleased(new ExampleCommand());
 
   public OI() {
-    stick0_btnA.whenPressed(new RetractIntake());
+    stick0_btnA.whenPressed(new AutoClimb());
   }
 }

@@ -7,43 +7,42 @@
 
 package frc.robot.commands;
 
-import com.revrobotics.ControlType;
-
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class RetractIntake extends Command {
-  public RetractIntake() {
+public class DriveShortWithClimbWheels extends Command {
+  public int initEncoder;
+  public DriveShortWithClimbWheels() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.arm);
+    requires(Robot.climb);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    System.out.println("Retracting intake to begin climbing...");
-    Robot.climbing = true;
-    Robot.arm.armPID.setReference(0, ControlType.kPosition);
-    Robot.arm.wristPID.setReference(0, ControlType.kPosition);
+    Robot.climb.rearClimbWheels.set(0);
+    initEncoder = Robot.climb.rearClimbWheels.getSelectedSensorPosition();
+    System.out.println("Started Driving Forward a Litle Bit");
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.arm.armPID.setReference(0, ControlType.kPosition);
-    Robot.arm.wristPID.setReference(0, ControlType.kPosition);
+    Robot.climb.rearClimbWheels.set(0.7);
+    System.out.println(Robot.climb.rearClimbWheels.getSelectedSensorPosition());
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return !Robot.climbing;
+    return Robot.climb.rearClimbWheels.getSelectedSensorPosition() - initEncoder > 100;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    System.out.println("Finished");
   }
 
   // Called when another command which requires one or more of the same
