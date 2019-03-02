@@ -45,7 +45,7 @@ public class RunArm extends Command {
     //Robot.arm.wristMotor.set(wristSpeed);
 
     //if(Robot.climbing) {
-      Robot.arm.armPID.setReference(0, ControlType.kPosition);
+      Robot.arm.armPID.setReference(0, ControlType.kPosition); 
       Robot.arm.wristPID.setReference(0, ControlType.kPosition);
     /*} else {
       Robot.arm.armPID.setReference((Robot.lift.getEncoder() / 2000) - 15, ControlType.kPosition);

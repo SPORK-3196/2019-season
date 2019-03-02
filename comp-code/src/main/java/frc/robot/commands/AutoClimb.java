@@ -33,5 +33,6 @@ public class AutoClimb extends CommandGroup {
 
     addSequential(new BothClimbersOut());
     addSequential(new DriveShortWithClimbWheels());
+    addSequential(new RetractFrontClimber());
   }
 }
