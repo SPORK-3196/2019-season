@@ -27,13 +27,13 @@ public class RetractFrontClimber extends Command {
   protected void execute() {
     Robot.climb.frontClimb.set(0.7);
     Robot.climb.rearClimb.set(-0.5);
-    System.out.println(Robot.climb.frontClimb.getSensorCollection().getAnalogIn());
+    //System.out.println(Robot.climb.frontClimb.getSensorCollection().getAnalogIn());
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return (Robot.climb.frontClimb.getSensorCollection().getAnalogIn() > 1000);
+    return (Robot.climb.frontClimb.getSensorCollection().isFwdLimitSwitchClosed());
   }
 
   // Called once after isFinished returns true

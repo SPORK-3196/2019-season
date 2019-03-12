@@ -29,14 +29,14 @@ public class DriveShortWithClimbWheels extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.climb.rearClimbWheels.set(0.7);
+    Robot.climb.rearClimbWheels.set(0.4);
    // System.out.println(Robot.climb.rearClimbWheels.getSelectedSensorPosition());
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.climb.rearClimbWheels.getSelectedSensorPosition() - initEncoder < -5000;
+    return Math.abs(Robot.climb.rearClimbWheels.getSelectedSensorPosition() - initEncoder) > 4000;
   }
 
   // Called once after isFinished returns true

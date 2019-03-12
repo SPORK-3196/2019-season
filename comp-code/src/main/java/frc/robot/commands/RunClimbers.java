@@ -34,8 +34,8 @@ public class RunClimbers extends Command {
     boolean bumperL = Robot.controller0.getBumper(Hand.kLeft);
     boolean bumperR = Robot.controller0.getBumper(Hand.kRight);
 
-    double frontClimbSpeed = bumperR ? 0.5 : triggerR * 0;//-0.6;
-    double rearClimbSpeed = bumperL ? 0.5 : triggerL * 0;//-0.7;
+    double frontClimbSpeed = bumperR ? 0.5 : triggerR * -0.6;
+    double rearClimbSpeed = bumperL ? 0.5 : triggerL * -0.7;
     double rearClimbDriveSpeed = -Robot.controller0.getRawAxis(5)*0.7;
 
     Robot.climb.frontClimb.set(frontClimbSpeed);

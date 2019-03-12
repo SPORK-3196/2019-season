@@ -38,7 +38,8 @@ public class BothClimbersOut extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return (Robot.climb.frontClimb.getSensorCollection().getAnalogIn() < 330 && Robot.climb.rearClimb.getSensorCollection().getAnalogIn() < 360);
+    return (Robot.climb.frontClimb.getSensorCollection().isRevLimitSwitchClosed() && Robot.climb.rearClimb.getSensorCollection().isRevLimitSwitchClosed());
+    //return true;
   }
 
   // Called once after isFinished returns true
