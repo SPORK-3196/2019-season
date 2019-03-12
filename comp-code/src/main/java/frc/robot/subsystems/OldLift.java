@@ -7,19 +7,19 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.LiftWithJoystick;
 
 /**
  * Add your docs here.
  */
-public class Lift extends PIDSubsystem {
-  /**
-   * Add your docs here.
-   */
+public class OldLift extends Subsystem {
+  // Put methods for controlling this subsystem
+  // here. Call these from Commands.
 
-  public int offset = 0;
+  /*public int offset = 0;
 
   public WPI_TalonSRX liftMotor = new WPI_TalonSRX(10);
 
@@ -33,33 +33,12 @@ public class Lift extends PIDSubsystem {
 
   public void resetEncoderTo(int val) {
     offset = liftMotor.getSelectedSensorPosition() - val;
-  }
-  
-  public Lift() {
-    // Intert a subsystem name and PID values here
-    super("Lift", 0.0019, 0, 0.005);
-    // Use these to get going:
-    // setSetpoint() - Sets where the PID controller should move the system
-    // to
-    // enable() - Enables the PID controller.
-    setSetpoint(10000);
-    enable();
-  }
+  }*/
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new LiftWithJoystick());
-  }
-
-  @Override
-  public double returnPIDInput() {
-    return getEncoder();
-  }
-
-  @Override
-  public void usePIDOutput(double val) {
-    liftMotor.set(val);
+    //setDefaultCommand(new LiftWithJoystick());
   }
 }
