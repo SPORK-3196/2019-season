@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -66,13 +68,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    // Camera things
+    /*// Camera things
     if(Robot.controller1.getYButtonPressed()) {
       CameraServer.getInstance().removeCamera("USB Camera 0");
     }
     if(Robot.controller1.getYButtonReleased()) {
       CameraServer.getInstance().startAutomaticCapture();
-    }
+    }*/
   }
 
   /**
