@@ -27,8 +27,10 @@ public class BothClimbersOut extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.climb.frontClimb.set(-0.7);
-    Robot.climb.rearClimb.set(-0.7);
+    boolean frontLimit = Robot.climb.frontClimb.getSensorCollection().isRevLimitSwitchClosed();
+    boolean rearLimit = Robot.climb.rearClimb.getSensorCollection().isRevLimitSwitchClosed();
+    Robot.climb.frontClimb.set(rearLimit ? -0.4 : -0.7);
+    Robot.climb.rearClimb.set(frontLimit ? -0.4 : -0.7);
 
     //System.out.print(Robot.climb.frontClimb.getSensorCollection().getAnalogIn());
     //System.out.print("\t");

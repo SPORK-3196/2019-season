@@ -55,7 +55,7 @@ public class Robot extends TimedRobot {
     climb = new Climb();
     m_oi = new OI();
 
-    CameraServer.getInstance().startAutomaticCapture();
+    //CameraServer.getInstance().startAutomaticCapture();
   }
 
   /**

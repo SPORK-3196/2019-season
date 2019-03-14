@@ -26,7 +26,7 @@ public class RunArm extends Command {
     Robot.arm.armPID.setP(0.05);
     Robot.arm.armPID.setI(0);
     Robot.arm.armPID.setD(0);
-    Robot.arm.armPID.setOutputRange(-0.5, 0.5);
+    Robot.arm.armPID.setOutputRange(-0.2, 0.2);
 
     Robot.arm.wristMotor.set(0);
     Robot.arm.wristPID.setP(0.1);
@@ -49,7 +49,7 @@ public class RunArm extends Command {
       Robot.arm.wristPID.setReference(0, ControlType.kPosition);
     /*} else {
       Robot.arm.armPID.setReference((Robot.lift.getEncoder() / 2000) - 15, ControlType.kPosition);
-      Robot.arm.wristPID.setReference(((Robot.arm.armEncoder + 15.0) * (8.5/15.0)) - 9.5, ControlType.kPosition);
+      Robot.arm.wristPID.setReference(((Robot.arm.armEncoder + 15.0) * (8.5/15.0)) - 10, ControlType.kPosition);
     }*/
 
     //Robot.arm.armPID.setReference(-15, ControlType.kPosition);

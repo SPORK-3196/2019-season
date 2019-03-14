@@ -43,7 +43,7 @@ public class Lift extends PIDSubsystem {
     // to
     // enable() - Enables the PID controller.
     setSetpoint(10000);
-    enable();
+    disable();
   }
 
   @Override
