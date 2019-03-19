@@ -27,9 +27,13 @@ public class DriveWithJoystick extends Command {
   @Override
   protected void execute() {
     double driveCoef = Robot.lift.getEncoder() > 20000 ? 0.7 : 0.9;
+    //double driveCoef = 0.9;
+    double axis1 = Robot.controller0.getRawAxis(1);
+    double axis5 = Robot.controller0.getRawAxis(5);
 
-    double driveSpeed = -driveCoef*Robot.controller0.getRawAxis(1);
-    double driveRotation = driveCoef*Robot.controller0.getRawAxis(0);
+    double driveSpeed = Math.abs(axis1) > Math.abs(axis5) ? -driveCoef*axis1 : -0.7*axis5;
+    double driveRotation = Robot.controller0.getRawAxis(0);
+
     Robot.drive.drive.arcadeDrive(driveSpeed, driveRotation);
 
     int encoderDL = Robot.drive.frontLeft.getSelectedSensorPosition();

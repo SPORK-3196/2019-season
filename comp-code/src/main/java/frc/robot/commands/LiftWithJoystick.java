@@ -26,8 +26,12 @@ public class LiftWithJoystick extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double liftSpeedCoef = 1.0;
+    double liftSpeedCoef = -1.0;
     double liftInput = -Robot.controller1.getRawAxis(1);
+
+    System.out.println(Robot.lift.getEncoder());
+
+    Robot.lift.liftMotor.set(liftSpeedCoef * liftInput);
 
     //System.out.println(Robot.lift.getEncoder());
 
@@ -41,7 +45,7 @@ public class LiftWithJoystick extends Command {
       }*/
   
       //Robot.lift.liftMotor.set(ControlMode.PercentOutput, liftInput * liftSpeedCoef);
-      Robot.lift.liftMotor.set(-liftInput * liftSpeedCoef);
+      //Robot.lift.liftMotor.set(-liftInput * liftSpeedCoef);
     /*} else {
       Robot.lift.enable();
     }*/

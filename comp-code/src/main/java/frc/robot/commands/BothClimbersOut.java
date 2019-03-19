@@ -20,7 +20,6 @@ public class BothClimbersOut extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.climbing = true;
     System.out.println("Both climbers out!");
   }
 
@@ -40,7 +39,7 @@ public class BothClimbersOut extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return (Robot.climb.frontClimb.getSensorCollection().isRevLimitSwitchClosed() && Robot.climb.rearClimb.getSensorCollection().isRevLimitSwitchClosed());
+    return Robot.abortClimb || (Robot.climb.frontClimb.getSensorCollection().isRevLimitSwitchClosed() && Robot.climb.rearClimb.getSensorCollection().isRevLimitSwitchClosed());
     //return true;
   }
 

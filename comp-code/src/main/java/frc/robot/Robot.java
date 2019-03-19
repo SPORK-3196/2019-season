@@ -21,6 +21,7 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Climb;
+import frc.robot.commands.RunClimbers;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -38,6 +39,7 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
 
   public static boolean climbing = false;
+  public static boolean abortClimb = false;
 
   public static XboxController controller0 = new XboxController(0);
   public static XboxController controller1 = new XboxController(1);
@@ -55,7 +57,7 @@ public class Robot extends TimedRobot {
     climb = new Climb();
     m_oi = new OI();
 
-    //CameraServer.getInstance().startAutomaticCapture();
+    CameraServer.getInstance().startAutomaticCapture();
   }
 
   /**
@@ -68,13 +70,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    /*// Camera things
-    if(Robot.controller1.getYButtonPressed()) {
-      CameraServer.getInstance().removeCamera("USB Camera 0");
-    }
-    if(Robot.controller1.getYButtonReleased()) {
-      CameraServer.getInstance().startAutomaticCapture();
-    }*/
+    Robot.arm.armEncoder = Robot.arm.armMotor.getEncoder().getPosition();
+    Robot.arm.wristEncoder = Robot.arm.wristMotor.getEncoder().getPosition();
+
+    Robot.abortClimb = Robot.controller0.getYButton();
+
+    /*System.out.print(Robot.arm.armEncoder);
+    System.out.print("\t\t\t");
+    System.out.println(Robot.arm.wristEncoder);*/
   }
 
   /**

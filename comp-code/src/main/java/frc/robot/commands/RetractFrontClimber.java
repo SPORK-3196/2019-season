@@ -33,7 +33,7 @@ public class RetractFrontClimber extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return (Robot.climb.frontClimb.getSensorCollection().isFwdLimitSwitchClosed());
+    return Robot.abortClimb || (Robot.climb.frontClimb.getSensorCollection().isFwdLimitSwitchClosed());
   }
 
   // Called once after isFinished returns true

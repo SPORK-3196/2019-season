@@ -26,7 +26,7 @@ public class RunArm extends Command {
     Robot.arm.armPID.setP(0.05);
     Robot.arm.armPID.setI(0);
     Robot.arm.armPID.setD(0);
-    Robot.arm.armPID.setOutputRange(-0.2, 0.2);
+    Robot.arm.armPID.setOutputRange(-0.4, 0.4);
 
     Robot.arm.wristMotor.set(0);
     Robot.arm.wristPID.setP(0.1);
@@ -38,24 +38,41 @@ public class RunArm extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    //double armSpeed = -0.4*Robot.controller1.getRawAxis(1);
     //double wristSpeed = 0.4*Robot.controller1.getRawAxis(5);
     //double wristSpeed = Robot.controller1.getAButton() ? 0.4 : Robot.controller1.getBButton() ? -0.4 : 0;
 
     //Robot.arm.armMotor.set(armSpeed);
     //Robot.arm.wristMotor.set(wristSpeed);
 
-    //if(Robot.climbing) {
-      Robot.arm.armPID.setReference(0, ControlType.kPosition); 
-      Robot.arm.wristPID.setReference(0, ControlType.kPosition);
-    /*} else {
-      Robot.arm.armPID.setReference((Robot.lift.getEncoder() / 2000) - 15, ControlType.kPosition);
-      Robot.arm.wristPID.setReference(((Robot.arm.armEncoder + 15.0) * (8.5/15.0)) - 10, ControlType.kPosition);
-    }*/
-
-    //Robot.arm.armPID.setReference(-15, ControlType.kPosition);
+    double armOffset = Robot.controller1.getAButton() ? 4.5 : 0.0;
+    double wristOffset = Robot.controller1.getAButton() ? 3.0 : 0.0;
 
     Robot.arm.armEncoder = Robot.arm.armMotor.getEncoder().getPosition();
     Robot.arm.wristEncoder = Robot.arm.wristMotor.getEncoder().getPosition();
+
+    if(Robot.controller1.getYButton()) {
+      Robot.arm.armPID.setReference(0, ControlType.kPosition); 
+      Robot.arm.wristPID.setReference(0, ControlType.kPosition);
+    } else {
+      Robot.arm.armPID.setReference((((Robot.lift.getEncoder() / 30000.0) - 1.0) * 16.9) + armOffset, ControlType.kPosition);
+      if(Robot.lift.getEncoder() <= 4000) {
+        Robot.arm.wristPID.setReference((((Robot.arm.armEncoder + 16.9) * (7.6/16.9)) - 7.6) + wristOffset, ControlType.kPosition);
+      } else {
+        Robot.arm.wristPID.setReference((((Robot.arm.armEncoder + 16.9) * (10.6/16.9)) - 10.6) + wristOffset, ControlType.kPosition);
+      }
+      /*if(Robot.arm.armEncoder <= -13.0) {
+        Robot.arm.wristPID.setReference(((Robot.arm.armEncoder + 16.9) * (7.6/16.9)) - 7.6, ControlType.kPosition);
+      } else {
+        Robot.arm.wristPID.setReference(((Robot.arm.armEncoder + 16.9) * (10.6/16.9)) - 10.6, ControlType.kPosition);
+      }*/
+    }
+
+    //Robot.arm.armPID.setReference(-15, ControlType.kPosition);
+
+    /*System.out.print(Robot.arm.armEncoder);
+    System.out.print("\t\t\t");
+    System.out.println(Robot.arm.wristEncoder);*/
 
     //System.out.println(((Robot.arm.armEncoder + 15.0) * (9.0/15.0)) - 9f);
   }
@@ -63,7 +80,7 @@ public class RunArm extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.climbing;
+    return false;
   }
 
   // Called once after isFinished returns true

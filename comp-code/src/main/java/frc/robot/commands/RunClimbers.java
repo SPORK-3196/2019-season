@@ -23,7 +23,7 @@ public class RunClimbers extends Command {
   protected void initialize() {
     Robot.climb.frontClimb.set(0);
     Robot.climb.rearClimb.set(0);
-    Robot.climb.rearClimbWheels.set(0);
+    //Robot.climb.rearClimbWheels.set(0);
   }
 
   // Called repeatedly when this Command is scheduled to run

@@ -36,7 +36,7 @@ public class DriveShortWithClimbWheels extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Math.abs(Robot.climb.rearClimbWheels.getSelectedSensorPosition() - initEncoder) > 5000;
+    return Robot.abortClimb || (Math.abs(Robot.climb.rearClimbWheels.getSelectedSensorPosition() - initEncoder) > 5000);
   }
 
   // Called once after isFinished returns true

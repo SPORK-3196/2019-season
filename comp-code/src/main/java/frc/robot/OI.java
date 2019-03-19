@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.AutoClimb;
+import frc.robot.commands.RunClimbers;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -27,6 +28,7 @@ public class OI {
 
   Joystick stick0 = new Joystick(0);
   Button stick0_btnA = new JoystickButton(stick0, 1);
+  Button stick0_btnY = new JoystickButton(stick0, 4);
 
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to
@@ -50,5 +52,6 @@ public class OI {
 
   public OI() {
     stick0_btnA.whenPressed(new AutoClimb());
+    stick0_btnY.whenReleased(new RunClimbers());
   }
 }
