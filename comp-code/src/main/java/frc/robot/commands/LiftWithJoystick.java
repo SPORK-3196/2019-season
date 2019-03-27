@@ -30,16 +30,28 @@ public class LiftWithJoystick extends Command {
     double liftSpeedCoef = -1.0;
 
     //System.out.println(Robot.lift.getEncoder());
-    if(liftInput < 0) {
-      if(Robot.lift.getEncoder() < 10000) {
-        liftSpeedCoef = -0.4;
-      }
-      if(Robot.lift.getEncoder() < 1000) {
-        liftSpeedCoef = -0.0;
-      }
+    if(Robot.controller1.getXButtonPressed()) {
+      Robot.lift.setSetpoint(10000);
+      Robot.lift.enable();
     }
-  
-    Robot.lift.liftMotor.set(liftInput * liftSpeedCoef);
+
+    if(Math.abs(liftInput) > 0.08) {
+      Robot.lift.disable();
+      if(liftInput < 0.0) {
+        if(Robot.lift.getEncoder() < 10000) {
+          liftSpeedCoef = -0.4;
+        }
+        if(Robot.lift.getEncoder() < 1000) {
+          liftSpeedCoef = -0.0;
+        }
+      }
+
+      Robot.lift.liftMotor.set(liftInput * liftSpeedCoef);
+      //Robot.lift.setSetpoint(Robot.lift.getEncoder());
+    }
+
+    
+    System.out.println(Robot.lift.getPIDController().getError());
   }
 
 

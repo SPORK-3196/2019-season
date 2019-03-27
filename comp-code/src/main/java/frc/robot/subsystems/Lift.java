@@ -37,12 +37,12 @@ public class Lift extends PIDSubsystem {
   
   public Lift() {
     // Intert a subsystem name and PID values here
-    super("Lift", 0.0019, 0, 0.005);
+    super("Lift", 0.0010, 0, 0.001);
     // Use these to get going:
     // setSetpoint() - Sets where the PID controller should move the system
     // to
     // enable() - Enables the PID controller.
-    setSetpoint(10000);
+    setSetpoint(0);
     disable();
   }
 
@@ -60,6 +60,6 @@ public class Lift extends PIDSubsystem {
 
   @Override
   public void usePIDOutput(double val) {
-    liftMotor.set(val);
+    liftMotor.set(-val);
   }
 }
