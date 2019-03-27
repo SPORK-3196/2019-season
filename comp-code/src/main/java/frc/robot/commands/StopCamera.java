@@ -10,43 +10,27 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LiftWithJoystick extends Command {
-  public LiftWithJoystick() {
+public class StopCamera extends Command {
+  public StopCamera() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.lift);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.lift.liftMotor.set(0);
+    Robot.jevois.close();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double liftInput = -Robot.controller1.getRawAxis(1);
-    double liftSpeedCoef = -1.0;
-
-    //System.out.println(Robot.lift.getEncoder());
-    if(liftInput < 0) {
-      if(Robot.lift.getEncoder() < 10000) {
-        liftSpeedCoef = -0.4;
-      }
-      if(Robot.lift.getEncoder() < 1000) {
-        liftSpeedCoef = -0.0;
-      }
-    }
-  
-    Robot.lift.liftMotor.set(liftInput * liftSpeedCoef);
   }
-
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true

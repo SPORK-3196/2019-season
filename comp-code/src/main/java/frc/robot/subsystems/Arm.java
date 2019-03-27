@@ -24,6 +24,8 @@ public class Arm extends Subsystem {
   public double armEncoder = 0;
   public double wristEncoder = 0;
 
+  public boolean armOut = false;
+
   public CANSparkMax armMotor = new CANSparkMax(8, MotorType.kBrushless);
   public CANPIDController armPID = armMotor.getPIDController();
 

@@ -26,7 +26,7 @@ public class DriveWithJoystick extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double driveCoef = Robot.lift.getEncoder() > 20000 ? 0.7 : 0.9;
+    double driveCoef = Robot.lift.getEncoder() > 20000 ? 0.7 : 1.0;
     //double driveCoef = 0.9;
     double axis1 = Robot.controller0.getRawAxis(1);
     double axis5 = Robot.controller0.getRawAxis(5);

@@ -9,6 +9,7 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -44,6 +45,8 @@ public class Robot extends TimedRobot {
   public static XboxController controller0 = new XboxController(0);
   public static XboxController controller1 = new XboxController(1);
 
+  public static UsbCamera jevois;
+
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -57,7 +60,7 @@ public class Robot extends TimedRobot {
     climb = new Climb();
     m_oi = new OI();
 
-    CameraServer.getInstance().startAutomaticCapture();
+    jevois = CameraServer.getInstance().startAutomaticCapture("jevois", "/dev/video0");
   }
 
   /**
@@ -74,10 +77,6 @@ public class Robot extends TimedRobot {
     Robot.arm.wristEncoder = Robot.arm.wristMotor.getEncoder().getPosition();
 
     Robot.abortClimb = Robot.controller0.getYButton();
-
-    /*System.out.print(Robot.arm.armEncoder);
-    System.out.print("\t\t\t");
-    System.out.println(Robot.arm.wristEncoder);*/
   }
 
   /**

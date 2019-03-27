@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.RunIntake;
 
@@ -19,6 +20,8 @@ public class Intake extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public WPI_TalonSRX intakeMotor = new WPI_TalonSRX(5);
+
+  public Servo testServo = new Servo(0);
 
   @Override
   public void initDefaultCommand() {

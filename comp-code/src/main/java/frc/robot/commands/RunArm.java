@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import com.revrobotics.ControlType;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
@@ -45,27 +46,41 @@ public class RunArm extends Command {
     //Robot.arm.armMotor.set(armSpeed);
     //Robot.arm.wristMotor.set(wristSpeed);
 
-    double armOffset = Robot.controller1.getAButton() ? 4.5 : 0.0;
-    double wristOffset = Robot.controller1.getAButton() ? 3.0 : 0.0;
+    double armOffset = 3.0;
+    double wristOffset = 4.0;
 
     Robot.arm.armEncoder = Robot.arm.armMotor.getEncoder().getPosition();
     Robot.arm.wristEncoder = Robot.arm.wristMotor.getEncoder().getPosition();
 
-    if(Robot.controller1.getYButton()) {
-      Robot.arm.armPID.setReference(0, ControlType.kPosition); 
-      Robot.arm.wristPID.setReference(0, ControlType.kPosition);
-    } else {
-      Robot.arm.armPID.setReference((((Robot.lift.getEncoder() / 30000.0) - 1.0) * 16.9) + armOffset, ControlType.kPosition);
-      if(Robot.lift.getEncoder() <= 4000) {
-        Robot.arm.wristPID.setReference((((Robot.arm.armEncoder + 16.9) * (7.6/16.9)) - 7.6) + wristOffset, ControlType.kPosition);
-      } else {
+    if(Robot.controller1.getYButtonPressed()) {
+      Robot.arm.armOut = !Robot.arm.armOut;
+    }
+
+    if(Robot.arm.armOut) {
+      Robot.arm.armPID.setOutputRange(-0.15, 0.15);
+      Robot.arm.wristPID.setOutputRange(-0.25, 0.25);
+
+      if(Robot.controller1.getAButton()) {
+          Robot.arm.armPID.setReference((((Robot.lift.getEncoder() / 30000.0) - 1.0) * 16.9), ControlType.kPosition);
+          Robot.arm.wristPID.setReference((((Robot.arm.armEncoder + 16.9) * (7.6/16.9)) - 7.6), ControlType.kPosition);
+      } else if(Robot.controller1.getBumper(Hand.kLeft)) {
+        Robot.arm.armPID.setReference((((Robot.lift.getEncoder() / 30000.0) - 1.0) * 16.9) + armOffset, ControlType.kPosition);
         Robot.arm.wristPID.setReference((((Robot.arm.armEncoder + 16.9) * (10.6/16.9)) - 10.6) + wristOffset, ControlType.kPosition);
-      }
-      /*if(Robot.arm.armEncoder <= -13.0) {
-        Robot.arm.wristPID.setReference(((Robot.arm.armEncoder + 16.9) * (7.6/16.9)) - 7.6, ControlType.kPosition);
       } else {
-        Robot.arm.wristPID.setReference(((Robot.arm.armEncoder + 16.9) * (10.6/16.9)) - 10.6, ControlType.kPosition);
-      }*/
+        Robot.arm.armPID.setReference((((Robot.lift.getEncoder() / 30000.0) - 1.0) * 16.9), ControlType.kPosition);
+        Robot.arm.wristPID.setReference((((Robot.arm.armEncoder + 16.9) * (10.6/16.9)) - 10.6), ControlType.kPosition);
+      }
+    } else {
+      Robot.arm.armPID.setOutputRange(-0.4, 0.4);
+      Robot.arm.wristPID.setOutputRange(-0.4, 0.4);
+
+      if(Robot.lift.getEncoder() < 15000) {
+        Robot.arm.armPID.setReference(0, ControlType.kPosition); 
+        Robot.arm.wristPID.setReference(0, ControlType.kPosition);
+      } else {
+        Robot.arm.armPID.setReference(-1.69, ControlType.kPosition); 
+        Robot.arm.wristPID.setReference(-1.06, ControlType.kPosition);
+      }
     }
 
     //Robot.arm.armPID.setReference(-15, ControlType.kPosition);
