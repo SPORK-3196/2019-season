@@ -27,9 +27,6 @@ public class RunIntake extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //double servoPos = (Robot.controller1.getRawAxis(5) + 1.0) / 2.0;
-    //Robot.intake.testServo.set(servoPos);
-
     double intakeSpeed = Robot.controller1.getRawAxis(3) - Robot.controller1.getRawAxis(2);
     Robot.intake.intakeMotor.set(intakeSpeed);
   }

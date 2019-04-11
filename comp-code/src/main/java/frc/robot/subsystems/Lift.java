@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.robot.commands.LiftWithJoystick;
+import edu.wpi.first.wpilibj.Servo;
 
 /**
  * Add your docs here.
@@ -22,6 +23,8 @@ public class Lift extends PIDSubsystem {
   public int offset = 0;
 
   public WPI_TalonSRX liftMotor = new WPI_TalonSRX(10);
+
+  public Servo cameraServo = new Servo(0);
 
   public int getEncoder() {
     return liftMotor.getSelectedSensorPosition() - offset;

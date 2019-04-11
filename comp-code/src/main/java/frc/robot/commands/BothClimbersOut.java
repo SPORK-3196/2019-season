@@ -31,6 +31,9 @@ public class BothClimbersOut extends Command {
     Robot.climb.frontClimb.set(rearLimit ? -0.4 : -0.7);
     Robot.climb.rearClimb.set(frontLimit ? -0.4 : -0.7);
 
+    /*Robot.frontLS.setBoolean(frontLimit);
+    Robot.rearLS.setBoolean(rearLimit);*/
+
     //System.out.print(Robot.climb.frontClimb.getSensorCollection().getAnalogIn());
     //System.out.print("\t");
     //System.out.println(Robot.climb.rearClimb.getSensorCollection().getAnalogIn());
@@ -39,7 +42,7 @@ public class BothClimbersOut extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.abortClimb || (Robot.climb.frontClimb.getSensorCollection().isRevLimitSwitchClosed() && Robot.climb.rearClimb.getSensorCollection().isRevLimitSwitchClosed());
+    return Robot.overrideLimitSwitches || Robot.abortClimb || (Robot.climb.frontClimb.getSensorCollection().isRevLimitSwitchClosed() && Robot.climb.rearClimb.getSensorCollection().isRevLimitSwitchClosed());
     //return true;
   }
 

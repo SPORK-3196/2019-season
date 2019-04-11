@@ -12,8 +12,6 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.AutoClimb;
 import frc.robot.commands.RunClimbers;
-import frc.robot.commands.StartCamera;
-import frc.robot.commands.StopCamera;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -56,7 +54,5 @@ public class OI {
   public OI() {
     stick0_btnA.whenPressed(new AutoClimb());
     stick0_btnY.whenReleased(new RunClimbers());
-    stick0_btnStart.whenPressed(new StopCamera());
-    stick0_btnStart.whenReleased(new StartCamera());
   }
 }

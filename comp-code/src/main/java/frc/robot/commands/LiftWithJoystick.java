@@ -26,12 +26,22 @@ public class LiftWithJoystick extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    double servoPos = 0.0;
+    if(Robot.lift.getEncoder() > 20000) servoPos = 0.3;
+    else if(Robot.lift.getEncoder() > 10000) servoPos = 0.15;
+    Robot.lift.cameraServo.set(servoPos);
+
     double liftInput = -Robot.controller1.getRawAxis(1);
     double liftSpeedCoef = -1.0;
 
     //System.out.println(Robot.lift.getEncoder());
     if(Robot.controller1.getXButtonPressed()) {
-      Robot.lift.setSetpoint(10000);
+      Robot.arm.armOut = false; // Cargo dropoff
+      Robot.lift.setSetpoint(6000);
+      Robot.lift.enable();
+    } else if(Robot.controller1.getBButtonPressed()) {
+      Robot.arm.armOut = true; // Hatch pickup
+      Robot.lift.setSetpoint(3000);
       Robot.lift.enable();
     }
 
@@ -51,7 +61,7 @@ public class LiftWithJoystick extends Command {
     }
 
     
-    System.out.println(Robot.lift.getPIDController().getError());
+    //System.out.println(Robot.lift.getPIDController().getError());
   }
 
 

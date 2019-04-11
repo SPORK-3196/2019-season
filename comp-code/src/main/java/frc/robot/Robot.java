@@ -11,9 +11,12 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Drive;
@@ -41,11 +44,16 @@ public class Robot extends TimedRobot {
 
   public static boolean climbing = false;
   public static boolean abortClimb = false;
+  public static boolean overrideLimitSwitches = false;
 
   public static XboxController controller0 = new XboxController(0);
   public static XboxController controller1 = new XboxController(1);
 
-  public static UsbCamera jevois;
+  public static UsbCamera upper, lower;
+
+  public static ShuffleboardTab dashboard = Shuffleboard.getTab("Default");
+  public static NetworkTableEntry frontLS = dashboard.add("FrontLS", false).getEntry();
+  public static NetworkTableEntry rearLS = dashboard.add("RearLS", false).getEntry();
 
   /**
    * This function is run when the robot is first started up and should be
@@ -60,7 +68,10 @@ public class Robot extends TimedRobot {
     climb = new Climb();
     m_oi = new OI();
 
-    jevois = CameraServer.getInstance().startAutomaticCapture("jevois", "/dev/video0");
+    upper = CameraServer.getInstance().startAutomaticCapture("upper", "/dev/video0");
+    lower = CameraServer.getInstance().startAutomaticCapture("lower", "/dev/video1");
+
+    upper.setResolution(200, 150);
   }
 
   /**
@@ -77,6 +88,10 @@ public class Robot extends TimedRobot {
     Robot.arm.wristEncoder = Robot.arm.wristMotor.getEncoder().getPosition();
 
     Robot.abortClimb = Robot.controller0.getYButton();
+    Robot.overrideLimitSwitches = Robot.controller0.getXButton();
+
+    Robot.frontLS.setBoolean(climb.frontClimb.getSensorCollection().isRevLimitSwitchClosed());
+    Robot.rearLS.setBoolean(climb.rearClimb.getSensorCollection().isRevLimitSwitchClosed());
   }
 
   /**
